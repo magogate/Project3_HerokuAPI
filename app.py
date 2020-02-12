@@ -28,7 +28,11 @@ def index():
                     <tr>
                         <td> To get only GA Cities json for Accidents & Population - use </td>
                         <td> /gacities </td>
-                    </tr>              
+                    </tr>     
+                    <tr>
+                        <td> To get all accidents data in US of 2018 </td>
+                        <td> /usAccidents </td>
+                    </tr>         
                 <table>
                 <html>
             """
@@ -41,6 +45,10 @@ def all_city_Population():
 @app.route("/gacities")
 def ga_city_Population():
     return db.getGACityPopulation()
+
+@app.route("/usAccidents")
+def ga_us_accidents():
+    return db.getUSaccidents2018()
 
 if __name__ == "__main__":
     # app.run(debug=True)
