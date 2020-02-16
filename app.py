@@ -12,15 +12,20 @@
 #https://stackoverflow.com/questions/10572498/importerror-no-module-named-sqlalchemy
 
 from flask import Flask, jsonify, render_template, flash
+from flask_cors import CORS, cross_origin
 import dao as db
 
 app = Flask(__name__, static_url_path='/static')
+CORS(app, support_credentials=True)
 
 @app.route("/")
 def index():
     htmlTag ="""<html>
                 <table>
-                
+                    <tr>
+                        <td> To get all USA Counties json for Accidents & Population - use </td>
+                        <td> /allcounties </td>
+                    </tr>
                     <tr>
                         <td> To get all USA Cities json for Accidents & Population - use </td>
                         <td> /allcities </td>
@@ -32,11 +37,16 @@ def index():
                     <tr>
                         <td> To get all accidents data in US of 2018 </td>
                         <td> /usAccidents </td>
-                    </tr>         
+                    </tr>   
+                          
                 <table>
                 <html>
             """
     return htmlTag
+
+@app.route("/allcounties")
+def all_county_Population():
+    return db.getUSCountyPopulation()
 
 @app.route("/allcities")
 def all_city_Population():
